@@ -53,6 +53,11 @@
 #error "Unknown target CPU"
 #endif
 
+#if defined(__QNXNTO__)
+#define OPENSSL_64_BIT
+#define OPENSSL_X86_64
+#endif
+
 #if defined(__APPLE__)
 #define OPENSSL_APPLE
 #endif
