@@ -553,7 +553,8 @@ fn configure_cc(c: &mut cc::Build, target: &Target, c_root_dir: &Path, include_d
         let _ = c.compiler("clang");
         c.get_compiler()
     } else {
-        compiler
+        let _ = c.compiler("aarch64-linux-gnu-gcc"); 
+        c.get_compiler()
     };
 
     let _ = c.include(c_root_dir.join("include"));
