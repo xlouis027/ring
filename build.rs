@@ -552,9 +552,11 @@ fn configure_cc(c: &mut cc::Build, target: &Target, c_root_dir: &Path, include_d
     let compiler = if target.os == WINDOWS && target.arch == AARCH64 && !compiler.is_like_clang() {
         let _ = c.compiler("clang");
         c.get_compiler()
-    } else {
-        let _ = c.compiler("aarch64-linux-gnu-gcc"); 
+    } else if target.os == "nto" && target.arch == AARCH64 {
+        let _ = c.compiler("aarch64-linux-gnu-gcc");
         c.get_compiler()
+    } else {
+        compiler
     };
 
     let _ = c.include(c_root_dir.join("include"));
